@@ -1,6 +1,7 @@
 ﻿using log4net;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
@@ -146,6 +147,10 @@ namespace SocketServer
                                 keybd_event(Keys.Left, 0, KEYEVENTF_KEYUP, 0);
                                 keybd_event(Keys.Control, 0, KEYEVENTF_KEYUP, 0);
                             }
+                            else if (strContent.Contains("Shutdown"))
+                            {
+                                ShutDownPC();
+                            }
                         }
                     }
                 }
@@ -163,6 +168,14 @@ namespace SocketServer
                 }
                 Thread.Sleep(20);
             }
+        }
+
+        private static void ShutDownPC()
+        {
+            var psi = new ProcessStartInfo("shutdown", "/s /t 0");
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
+            Process.Start(psi);
         }
 
         private static void SendMessage(string message)
