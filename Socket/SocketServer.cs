@@ -15,6 +15,10 @@ namespace SocketServer
         [DllImport("user32.dll", EntryPoint = "keybd_event", SetLastError = true)]
         public static extern void keybd_event(Keys bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
 
+        public const int KEYEVENTF_KEYDOWN = 0x0000; // New definition
+        public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
+        public const int KEYEVENTF_KEYUP = 0x0002; //Key up flag
+
         private static ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static byte[] result = new byte[1024];
@@ -42,7 +46,6 @@ namespace SocketServer
                 logger.Warn(log);
                 Console.WriteLine(log);
 
-                //通过Clientsoket发送数据
                 Thread myThread = new Thread(ListenClientConnect);
                 myThread.Start();
             }
@@ -81,7 +84,6 @@ namespace SocketServer
             {
                 try
                 {
-                    //通过clientSocket接收数据
                     int receiveNumber = myClientSocket.Receive(result);
                     if(receiveNumber > 0)
                     {
@@ -115,6 +117,34 @@ namespace SocketServer
                             else if (strContent.Contains("PlayPause"))
                             {
                                 keybd_event(Keys.Space, 0, 0, 0);
+                            }
+                            else if (strContent.Contains("Mute"))
+                            {
+                                keybd_event(Keys.M, 0, 0, 0);
+                            }
+                            else if (strContent.Contains("F5S"))
+                            {
+                                keybd_event(Keys.Right, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.Right, 0, KEYEVENTF_KEYUP, 0);
+                            }
+                            else if (strContent.Contains("F30S"))
+                            {
+                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.Right, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.Right, 0, KEYEVENTF_KEYUP, 0);
+                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYUP, 0);
+                            }
+                            else if (strContent.Contains("B5S"))
+                            {
+                                keybd_event(Keys.Left, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.Left, 0, KEYEVENTF_KEYUP, 0);
+                            }
+                            else if (strContent.Contains("B30S"))
+                            {
+                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.Left, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.Left, 0, KEYEVENTF_KEYUP, 0);
+                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYUP, 0);
                             }
                         }
                     }

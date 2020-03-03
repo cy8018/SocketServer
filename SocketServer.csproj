@@ -78,7 +78,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="printer-blue.ico" />
     <Content Include="Server.ico" />
   </ItemGroup>
   <ItemGroup>
