@@ -130,10 +130,10 @@ namespace SocketServer
                             }
                             else if (strContent.Contains("F30S"))
                             {
-                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.ControlKey, 0, KEYEVENTF_KEYDOWN, 0);
                                 keybd_event(Keys.Right, 0, KEYEVENTF_KEYDOWN, 0);
                                 keybd_event(Keys.Right, 0, KEYEVENTF_KEYUP, 0);
-                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYUP, 0);
+                                keybd_event(Keys.ControlKey, 0, KEYEVENTF_KEYUP, 0);
                             }
                             else if (strContent.Contains("B5S"))
                             {
@@ -142,10 +142,10 @@ namespace SocketServer
                             }
                             else if (strContent.Contains("B30S"))
                             {
-                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYDOWN, 0);
+                                keybd_event(Keys.ControlKey, 0, KEYEVENTF_KEYDOWN, 0);
                                 keybd_event(Keys.Left, 0, KEYEVENTF_KEYDOWN, 0);
                                 keybd_event(Keys.Left, 0, KEYEVENTF_KEYUP, 0);
-                                keybd_event(Keys.Control, 0, KEYEVENTF_KEYUP, 0);
+                                keybd_event(Keys.ControlKey, 0, KEYEVENTF_KEYUP, 0);
                             }
                             else if (strContent.Contains("Shutdown"))
                             {

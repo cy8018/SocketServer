@@ -6,18 +6,12 @@ namespace SocketServer
 {
     class Program
     {
-        private static string socketType = "SYNC";   // Socket connection type:  SYNC: Long connection ASYNC: Short connection
         private static int serverPort = 20000;
         private static string serverIP = "0.0.0.0";
 
         private static void LoadConfig()
         {
             Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            if (config.AppSettings.Settings["SocketType"].Value.Length > 0)
-            {
-                socketType = config.AppSettings.Settings["SocketType"].Value;
-            }
 
             if (config.AppSettings.Settings["ServerListenIP"].Value.Length > 0)
             {
